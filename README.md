@@ -52,7 +52,7 @@ FIT-FORMA redefines fitness tracking through its dynamic live tracking applicati
 
 ## Contact
 
-For any inquiries or feedback, please reach out to [your-email@example.com](mailto:your-email@example.com).
+For any inquiries or feedback, please reach out to [vr.jaya160302@gmail.com](mailto:vr.jaya160302@gmail.com).
 
 ---
 
