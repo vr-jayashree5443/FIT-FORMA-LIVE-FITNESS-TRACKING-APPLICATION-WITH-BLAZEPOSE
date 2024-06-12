@@ -1,0 +1,50 @@
+def welcome():
+    if 'user' in session:
+        return f"Welcome, {session['user']}! <a href='/logout'>Logout</a>"
+    else:
+        return redirect('/')
+    
+def generate_frames():
+    while True:
+        if camera is not None:
+            success, frame = camera.read()
+            if not success:
+                continue
+
+            # Resize the frame to the desired dimensions
+            frame = imutils.resize(frame, width=520, height=480)  # Set the desired width and height
+
+            # Add text to the frame
+            cv2.putText(frame, 'Hi Flask', (100, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
+
+            # Encode the frame as JPEG
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame1 = buffer.tobytes()
+
+            # Yield the frame in byte format
+            yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame1 + b'\r\n')
+        else:
+            break
+
+    stop_camera()
+
+
+
+<style>
+        #video-container {
+            margin: 20px 20px;
+            width: 80% ; /* Set the desired width */
+            height: 850px; /* Set the desired height */
+            overflow: hidden;
+            position: relative;
+        }
+
+        #video_feed {
+            width: 100%; /* Stretch the video to fill the container horizontally */
+            height: 100%; /* Stretch the video to fill the container vertically */
+            object-fit: cover; /* Maintain aspect ratio and fill the container */
+        }
+    </style>
+    
+    
+align-items: flex-end;

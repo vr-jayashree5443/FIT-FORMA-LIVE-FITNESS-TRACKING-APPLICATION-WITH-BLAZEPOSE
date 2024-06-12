@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <title>Live Stream with Pose Estimation</title>
+
+    <style>
+        #container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+        #video-container {
+            width: 80%; /* Stretch the video to fill the container horizontally */
+            height: 930px;
+            /* Set the desired height */
+            overflow: hidden;
+            position: relative;
+        }
+        button {
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #video_feed {
+            width: 100%; /* Stretch the video to fill the container horizontally */
+            height: 100%; /* Stretch the video to fill the container vertically */
+            /* Maintain aspect ratio and fill the container */
+        }
+        #controls-container {
+            width: 20%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+        }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center the buttons vertically */
+            align-items: center; /* Center the buttons horizontally */
+            height: 100%; /* Occupy the full height of the controls container */
+        }
+        
+
+    </style>
+    <style>
+        .navbar-nav a {
+            cursor: pointer;
+        }
+        .card {
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Fit-Forma</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/page2"class="nav-link" id="exercise">Exercise</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/track" class="nav-link" id="track-progress">Track Progress</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout"class="nav-link" id="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="container">
+        <div id="video-container">
+            <img id="video_feed" src=""  />
+        </div>
+        <div id="controls-container">
+            <div id="controls">
+                <br>
+                <button onclick="startCamera()">Start Camera</button>
+                <br>
+                <button onclick="stopCamera()">Stop Camera</button>
+                <br>
+                <button onclick="finishStream()">Finish</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function startCamera() {
+            fetch('/start')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to start camera.');
+                    }
+                    document.getElementById('video_feed').src = '{{ url_for('video1') }}';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function stopCamera() {
+            fetch('/stop')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to stop camera.');
+                    }
+                    document.getElementById('video_feed').src = '';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        function finishStream() {
+            fetch('/finish')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to finish stream.');
+                    }
+                })
+                .then(data => console.log(data))  // Log response from the server
+                .catch(error => console.error('Error:', error));}
+    </script>
+    
+</body>
+</html>

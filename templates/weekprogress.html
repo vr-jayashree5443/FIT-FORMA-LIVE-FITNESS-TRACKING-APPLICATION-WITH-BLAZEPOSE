@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Graph with Markers</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="plot"></div>
+    <div id="plot2"></div>
+    <div id="plot3"></div>
+
+    <div id="plot4"></div>    <script>
+        // Extract data from Flask passed DataFrame
+        var month_year3 = {{ g|tojson }};
+        var total_minutes3 = {{h|tojson }};
+
+        // Create data trace
+        var trace = {
+            x: month_year3,
+            y: total_minutes3,
+            mode: 'lines+markers',
+            type: 'scatter',
+            name: 'Total Count'
+        };
+
+        // Define layout
+        var layout = {
+            title: 'Left Bicep Curl Data',
+            xaxis: { title: 'Days' },
+            yaxis: { title: 'Total Count' }
+        };
+
+        // Plot graph
+        Plotly.newPlot('plot', [trace], layout);
+        ////////////////////////////////////////////////////////////////////////////////////
+
+        var month_year2 = {{ e|tojson }};
+        var total_minutes2 = {{f|tojson }};
+
+        // Create data trace
+        var trace = {
+            x: month_year2,
+            y: total_minutes2,
+            mode: 'lines+markers',
+            type: 'scatter',
+            name: 'Total Count'
+        };
+
+        // Define layout
+        var layout = {
+            title: 'Right Bicep Curl data',
+            xaxis: { title: 'Days' },
+            yaxis: { title: 'Total Count' }
+        };
+
+        // Plot graph
+        Plotly.newPlot('plot2', [trace], layout);
+        /////////////////////////////////////////////////////////////////////////////
+        var month_year1 = {{ c|tojson }};
+        var total_minutes1 = {{d|tojson }};
+
+        // Create data trace
+        var trace = {
+            x: month_year1,
+            y: total_minutes1,
+            mode: 'lines+markers',
+            type: 'scatter',
+            name: 'Total Count'
+        };
+
+        // Define layout
+        var layout = {
+            title: 'Squats Data',
+            xaxis: { title: 'Days' },
+            yaxis: { title: 'Total Count' }
+        };
+
+        // Plot graph
+        Plotly.newPlot('plot3', [trace], layout);
+        ////////////////////////////////////////////////////////////////////////////////
+        var month_year = {{ a|tojson }};
+        var total_minutes = {{b|tojson }};
+
+        // Create data trace
+        var trace = {
+            x: month_year,
+            y: total_minutes,
+            mode: 'lines+markers',
+            type: 'scatter',
+            name: 'Total Minutes'
+        };
+
+        // Define layout
+        var layout = {
+            title: 'Plank Data ',
+            xaxis: { title: 'Days' },
+            yaxis: { title: 'Total Minutes' }
+        };
+
+        // Plot graph
+        Plotly.newPlot('plot4', [trace], layout);
+    </script>
+</body>
+</html>

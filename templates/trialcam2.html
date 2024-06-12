@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camera Capture</title>
+<style>
+    #container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+    }
+    #video-container {
+        width: 90%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    #video-element {
+        width: 100%;
+        height: 100%;
+    }
+    #placeholder-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    #controls-container {
+        width: 10%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    #controls {
+        text-align: center;
+    }
+    button {
+        margin: 10px 0;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="video-container">
+        <img id="placeholder-image" src="placeholder.jpg" alt="Placeholder Image">
+        <video id="video-element" autoplay style="display: none;"></video>
+    </div>
+    <div id="controls-container">
+        <div id="controls">
+            <button id="startButton">Start Camera</button>
+            <button id="stopButton">Stop Camera</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const videoElement = document.getElementById('video-element');
+    const placeholderImage = document.getElementById('placeholder-image');
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+    let mediaStream = null;
+
+    startButton.addEventListener('click', startCamera);
+    stopButton.addEventListener('click', stopCamera);
+
+    function startCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                mediaStream = stream;
+                videoElement.srcObject = mediaStream;
+                videoElement.style.display = 'block';
+                placeholderImage.style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Error accessing the camera:', error);
+            });
+    }
+
+    function stopCamera() {
+        if (mediaStream) {
+            mediaStream.getTracks().forEach(track => {
+                track.stop();
+            });
+            videoElement.srcObject = null;
+            videoElement.style.display = 'none';
+            placeholderImage.style.display = 'block';
+        }
+    }
+</script>
+</body>
+</html>

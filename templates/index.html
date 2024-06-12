@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Tracker</title>
+  <link rel="stylesheet" href="\static\style.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <style>
+
+    
+
+  </style>
+  <script>
+    $(function() {
+      $("#DOB").datepicker();
+  });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Fit-Forma</h1>
+    <div class="login">
+      <h2>Login In</h2>
+      <form action="/login" method="POST">
+        <label for="username">Username (email)</label>
+        <input type="text" id="username" name="username" placeholder="Username">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password">
+        <button type="submit">Sign In</button>
+      </form>
+      <p>+ Create a new account</p>
+    </div>
+    <div class="register">
+      <h2>Register</h2>
+      <form action="/register" method="POST">
+        
+        <input type="text" id="email" name="email" placeholder="Username">
+       
+        <input type="text" id="name" name="name" placeholder="Name">
+      
+        <input type="text" id="DOB" name="DOB" placeholder="DD-MM-YYYY">
+    
+        <input type="text" id="mobile" name="mobile" placeholder="mobile">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
