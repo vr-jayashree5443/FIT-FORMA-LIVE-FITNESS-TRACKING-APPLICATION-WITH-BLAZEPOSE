@@ -55,5 +55,3 @@ FIT-FORMA redefines fitness tracking through its dynamic live tracking applicati
 For any inquiries or feedback, please reach out to [vr.jaya160302@gmail.com](mailto:vr.jaya160302@gmail.com).
 
 ---
-
-Thank you for using FIT-FORMA! We hope this application helps you achieve your fitness goals efficiently and effectively.
