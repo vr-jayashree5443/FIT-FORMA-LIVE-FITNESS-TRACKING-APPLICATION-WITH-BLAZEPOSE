@@ -1286,7 +1286,7 @@ def finish_stream():
     today= pd.to_datetime('today').date().strftime('%Y-%m-%d')
     print(today)
     #today = datetime.today().strftime('%d-%m-%Y')
-    
+    global pm,ps,lc,rc,s
     print(pm,ps,lc,rc,s)
     # Connect to the database
     connection = pymysql.connect(**db_config)
